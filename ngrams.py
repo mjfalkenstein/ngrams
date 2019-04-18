@@ -28,7 +28,7 @@ def compute_ngrams(input_string: str = '', n: int = 0) -> dict:
 
         # For each value from 1 to n...
         for j in range(1, n + 1):
-            
+
             # Build the ngram
             g = ' '.join(input_string_list[i: i + j])
 
@@ -83,7 +83,6 @@ def format_output(ngrams: dict = None) -> str:
 
 
 def main(args):
-
     # Check that CLI args are present. Any args after max_ngram_length are ignored
     if len(args) < 3:
         logging.error('Input file not specified. Correct CLI usage is: '
