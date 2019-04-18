@@ -8,12 +8,12 @@ Simply clone this repo into the directory of your choice; no further building sh
 ## Running
 Make sure you cd into the git repo directory, then run: 
 ```
-python3 ngrams.py <path/to/input/data.txt> <max_ngrams_length>```
-
+python3 ngrams.py <path/to/input/data.txt> <max_ngrams_length>
+```
 For example:
 ```
-python3 ngrams.py test_data/test1.txt 2```
-
+python3 ngrams.py test_data/test1.txt 2
+```
 This should yield the following output:
 ```
 a 2
@@ -27,4 +27,5 @@ fun puzzle 1
 good puzzle 1
 is a 1
 puzzle is 1
---- process finished in 0.0005331039428710938 seconds ---```
+--- process finished in 0.0005331039428710938 seconds ---
+```
