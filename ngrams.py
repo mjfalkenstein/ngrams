@@ -4,14 +4,14 @@ import time
 
 
 def compute_ngrams(input_string: str = '', n: int = 0) -> dict:
-    """Compute all ngrams for the given string up to a max length
+    """Compute all n-grams for the given string up to a max length
     Return a dict that maps the ngram string to a list. The mapping is always of format
         ngram -> [count, ngram_len_in_words].
     This helps sorting and output formatting later
 
     Keyword arguments:
     input_string -- the input string to be parsed. Assumes words are separated by ' ' (default '')
-    n -- the max length for the ngrams output in words (default 0)
+    n -- the max length for the n-grams output in words (default 0)
     """
     try:
         n = int(n)
@@ -23,18 +23,20 @@ def compute_ngrams(input_string: str = '', n: int = 0) -> dict:
     input_string_list = input_string.split(' ')
     output_dict = {}
 
-    # For all of the words in the input string...
-    for i in range(0, len(input_string_list) - n + 1):
+    # For each value from 1 to n...
+    for j in range(1, n + 1):
 
-        # For each value from 0 to n...
-        for j in range(1, n + 1):
+        # For all of the words in the input string...
+        for i in range(0, len(input_string_list)):
 
             # Build the ngram
             g = ' '.join(input_string_list[i: i + j])
 
-            # Insert the new ngram into the dict. If it's already there, increment the count
-            output_dict.setdefault(g, [0, j])
-            output_dict[g][0] += 1
+            # filter out empty strings and only enter n-grams for the current iteration
+            if g and g != ' ' and len(g.split(' ')) == j:
+                # Insert the new ngram into the dict. If it's already there, increment the count
+                output_dict.setdefault(g, [0, j])
+                output_dict[g][0] += 1
     return output_dict
 
 
@@ -48,7 +50,7 @@ def read_input_from_file(filepath: str = '') -> str:
 
         # Read in input file as a string and put it all on one line.
         # This makes the ngram calculations later on a little simpler.
-        # In the future, it might be desirable to calculate ngrams for each line.
+        # In the future, it might be desirable to calculate n-grams for each line.
         with open(filepath) as file:
             file_data = file.read()
             file_data = file_data.replace('\n', ' ')
@@ -59,11 +61,11 @@ def read_input_from_file(filepath: str = '') -> str:
 
 
 def format_output(ngrams: dict = None) -> str:
-    """Formats the given dictionary of ngrams for readable output.
-    See 'ngrams' function for exact data formatting
+    """Formats the given dictionary of n-grams for readable output.
+    See 'n-grams' function for exact data formatting
 
     Keyword arguments:
-    ngrams -- the dictionary describing all found ngrams (default None)
+    n-grams -- the dictionary describing all found n-grams (default None)
     """
     if not ngrams:
         return ''
@@ -85,7 +87,7 @@ def main(args):
     # Check that CLI args are present. Any args after max_ngram_length are ignored
     if len(args) < 3:
         logging.error('Input file not specified. Correct CLI usage is: '
-                      'python3 ngrams <path/to/input/file> <max_ngram_length>')
+                      'python3 ngrams.py <path/to/input/file> <max_ngram_length>')
         sys.exit(1)
     file_data = read_input_from_file(args[1])
     if not file_data:
