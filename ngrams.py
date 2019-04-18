@@ -23,12 +23,12 @@ def compute_ngrams(input_string: str = '', n: int = 0) -> dict:
     input_string_list = input_string.split(' ')
     output_dict = {}
 
-    # For each value from 1 to n...
-    for j in range(1, n + 1):
+    # For all of the words in the input string...
+    for i in range(0, len(input_string_list)):
 
-        # For all of the words in the input string...
-        for i in range(0, len(input_string_list)):
-
+        # For each value from 1 to n...
+        for j in range(1, n + 1):
+            
             # Build the ngram
             g = ' '.join(input_string_list[i: i + j])
 
